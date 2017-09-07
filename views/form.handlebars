@@ -1,0 +1,46 @@
+<br>
+<br>
+<div align="center">
+
+  <div class="text-success">                                                                                                                                                      <div class="container">
+<h1>Registration Form</h1>
+</div>
+<br>
+  <div class="form">
+
+    <form method="post" >
+      <!-- action="/greetings" -->
+    <input class="name" type="text" placeholder="Add registration" name="name" value=""></input>
+    <button class="btn btn-primary btn" type="submit">Add</button>
+    <!-- <button class="btn btn-primary btn" type="reset" >Reset</button> -->
+<a href="/reset" class="btn-primary btn">Reset</a>
+
+    <br>
+    <br>
+
+    <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="malmesbry" autocomplete="off" checked>Malmesbry
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="Bellvile" autocomplete="On">Bellvile
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="Cape Town" autocomplete="off">Cape Town
+  </label>
+    <button class="btn btn-primary btn" type="submit">Show</button>
+</div>
+
+<br>
+<br>
+
+<div id="reNumber">
+  {{#each reg}}
+    <p>{{this.name}}</p>
+    {{/each}}
+</div>
+
+    </div>
+      <!-- </form> -->
+    </div>
+</div>
