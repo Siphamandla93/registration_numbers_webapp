@@ -25,19 +25,25 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-//
-// function manageLocations(loc) {
-//     if (loc === "Malmebury") {
-//         return "ME"
-//     } else if (loc === "Bellvile") {
-//         return "CE"
-//     } else if (loc === "Cape Town") {
-//         return "CY"
-//     }
-// }
+app.get("/", function(req, res) {
+  res.redirect("/reg_numbers");
+})
+app.get('/Towns', function(req, res) {
+	var locations = req.query.locations
 
-// var locations = req.body.options;
+  if (locations === 'All') {
+		res.redirect('/');
+	}
+else{
+  Models.registrations.find({num: {$regex : locations}}, function(err, data) {
+      if (err) return err;
 
+      res.render('form', {reg: results});
+    });  
+ }
+
+
+});
 
   app.get('/numberRoute/:regnumber', function(req, res){
     // console.log({number:req.params.eish});
@@ -46,36 +52,46 @@ app.use(bodyParser.json());
 
   });
 
+
   app.get('/reg_numbers', function(req, res) {
-    var num = req.params.regnumber
-    models.User.find({}, function(err, results){
-      if (err) {
-        return next(err);
-      }
-    }).then(function(results){
-      res.render('form', {reg: results});
-    })
-    
+    var num = req.params.regnumber;
+
+      models.User.find({}, function(err, results){
+      if (err){
+          return next(err);
+        }
+
+
+      }).then(function(results){
+        res.render('form', {reg: results});
+      });
 });
 
-// var list = req.body
+
 app.post("/reg_numbers", function(req, res, next) {
 var num = req.body.name;
 //res.render("form", {Reg:num});
+if (num === "") {
+  console.log("enter a reg num");
+  res.redirect('/reg_numbers');
 
+} else {
   models.User.create({name:num},function(err, results){
         if (err){
           return next(err)
         }
 
         else {
+          req.flash('error', 'DataBase has been seccessfuly reseted thank you')
           console.log(num);
         }
 
 }).then(function(results){
   res.redirect('/reg_numbers');
 });
-});
+
+}
+  });
 
 
     // var locations = req.body.options;

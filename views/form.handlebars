@@ -12,8 +12,9 @@
       <!-- action="/greetings" -->
     <input class="name" type="text" placeholder="Add registration" name="name" value=""></input>
     <button class="btn btn-primary btn" type="submit">Add</button>
+    <button class="btn btn-primary btn" type="submit">Show</button>
     <!-- <button class="btn btn-primary btn" type="reset" >Reset</button> -->
-<a href="/reset" class="btn-primary btn">Reset</a>
+<!-- <a href="/" class="btn-primary btn">Show</a> -->
 
     <br>
     <br>
@@ -28,17 +29,20 @@
   <label class="btn btn-secondary">
     <input type="radio" name="options" id="Cape Town" autocomplete="off">Cape Town
   </label>
-    <button class="btn btn-primary btn" type="submit">Show</button>
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="All" autocomplete="off" checked>All
+  </label>
+
 </div>
 
 <br>
 <br>
 
+{{#each reg}}
 <div id="reNumber">
-  {{#each reg}}
     <p>{{this.name}}</p>
-    {{/each}}
 </div>
+{{/each}}
 
     </div>
       <!-- </form> -->
