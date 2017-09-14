@@ -3,6 +3,7 @@ var app = express();
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var flash = require('express-flash');
+var mongoose = require('mongoose');
 var session = require('express-session');
 var Models = require('./models/User');
 var MongoUrl = process.env.MONGO_DB_URL || 'mongodb://localhost/biggy';
@@ -18,6 +19,7 @@ app.set('view engine', 'handlebars');
 // app.use(express.cookieParser('keyboard cat'));
   app.use(session({secret: "keyboard cat", cookie:{ maxAge: 60000 *30}}));
   app.use(flash());
+
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({
@@ -39,7 +41,7 @@ else{
       if (err) return err;
 
       res.render('form', {reg: results});
-    });  
+    });
  }
 
 
