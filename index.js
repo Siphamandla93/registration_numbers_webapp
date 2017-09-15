@@ -32,16 +32,54 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-app.get("/filter", function(req, res) {
+app.get('/reg_numbers', function(req, res) {
+  //var num = req.params.regnumber;
+  models.User.find({}, function(err, results) {
+    if (err) {
+      return next(err);
+    }
+
+
+  }).then(function(results) {
+    res.render('form', {
+      reg: results
+    });
+  });
+});
+
+app.post("/reg_numbers", function(req, res, next) {
+  var num = req.body.name;
+  //res.render("form", {Reg:num});
+  if (num === "") {
+    req.flash('error', 'Please enter a registration number plate')
+    res.redirect('/reg_numbers');
+
+  } else {
+    models.User.create({
+      name: num
+    }, function(err, results) {
+      if (err) {
+        return next(err)
+      } else {
+        req.flash('error', 'Congratulations registration number plate has been added')
+        console.log(num);
+      }
+
+    }).then(function(results) {
+      res.redirect('/reg_numbers');
+    });
+
+  }
+});
+
+app.get("/filter", function(req, res, next) {
     var filtered = req.body.options
+    console.log(filtered);
     models.User.find({
-        name: {
-            $regex: filtered,
-            $options: "x"
-        }
+
     }, function(err, results) {
         if (err) {
-return next(err);
+return next(err, next);
         }
         else{
           console.log(results);
@@ -55,62 +93,44 @@ return next(err);
 
 });
 
-app.post('/filter', function(req, res){
-  var filtered = req.body.options
-// res.render('Towns');
-})
+app.post('/filter', function(req, res, next) {
+    var filtered = req.body.options
+    console.log(filtered);
+    models.User.find({
+        name: {
+            $regex: filtered,
+            $options: "x"
+        }
+    }, function(err, results) {
+        if (err) {
+return next(err, next);
+        }
+        else{
+          console.log(results);
+          res.render('form',{
+            reg: results
 
-app.get('/numberRoute/:regnumber', function(req, res) {
-    // console.log({number:req.params.eish});
-    var num = req.params.regnumber
-    res.render("numbers", {
-        number: num
-    });
+          })
+        }
+    })
+
 
 });
+
+
+// app.get('/numberRoute/:regnumber', function(req, res) {
+//     // console.log({number:req.params.eish});
+//     var num = req.params.regnumber
+//     res.render("numbers", {
+//         number: num
+//     });
+//
+// });
 
 // app.get('/filter', function(req, res)
 
-app.get('/reg_numbers', function(req, res) {
-    //var num = req.params.regnumber;
-    models.User.find({}, function(err, results) {
-        if (err) {
-            return next(err);
-        }
 
 
-    }).then(function(results) {
-        res.render('form', {
-            reg: results
-        });
-    });
-});
-
-
-app.post("/reg_numbers", function(req, res, next) {
-    var num = req.body.name;
-    //res.render("form", {Reg:num});
-    if (num === "") {
-        req.flash('error', 'Please enter a registration number plate')
-        res.redirect('/reg_numbers');
-
-    } else {
-        models.User.create({
-            name: num
-        }, function(err, results) {
-            if (err) {
-                return next(err)
-            } else {
-                req.flash('error', 'Congratulations registration number plate has been added')
-                console.log(num);
-            }
-
-        }).then(function(results) {
-            res.redirect('/reg_numbers');
-        });
-
-    }
-});
 
 
 // var locations = req.body.options;
