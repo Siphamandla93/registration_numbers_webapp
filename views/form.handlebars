@@ -12,7 +12,7 @@
       <!-- action="/greetings" -->
     <input class="name" type="text" placeholder="Add registration" name="name" value=""></input>
     <button class="btn btn-primary btn" type="submit">Add</button>
-    <button class="btn btn-primary btn" type="submit">Show</button>
+    <a href="/filter"><button class="btn btn-primary btn" type="submit">Show</button></a>
     <!-- <button class="btn btn-primary btn" type="reset" >Reset</button> -->
 <!-- <a href="/" class="btn-primary btn">Show</a> -->
 
@@ -21,28 +21,38 @@
 
     <div class="btn-group" data-toggle="buttons">
   <label class="btn btn-secondary active">
-    <input type="radio" name="options" id="malmesbry" autocomplete="off" checked>Malmesbry
+    <input type="radio" name="options" value="CE" id="malmesbry">Malmesbry
   </label>
   <label class="btn btn-secondary">
-    <input type="radio" name="options" id="Bellvile" autocomplete="On">Bellvile
+    <input type="radio" name="options" value="CY" id="Bellvile">Bellvile
   </label>
   <label class="btn btn-secondary">
-    <input type="radio" name="options" id="Cape Town" autocomplete="off">Cape Town
+    <input type="radio" name="options" value="CA" id="Cape Town">Cape Town
   </label>
   <label class="btn btn-secondary active">
-    <input type="radio" name="options" id="All" autocomplete="off" checked>All
+    <input type="radio" name="options" value="" id="All">All
   </label>
 
 </div>
 
 <br>
 <br>
+
+
+<p class="text-success">
+      {{#if messages.error}}
+      {{messages.error}}
+      {{/if}}
+    </p>
+
 
 {{#each reg}}
 <div id="reNumber">
     <p>{{this.name}}</p>
 </div>
 {{/each}}
+
+
 
     </div>
       <!-- </form> -->
