@@ -16,10 +16,10 @@ for CY 123 345 a user is be able to enter any registration number as the last pa
 - That's it! Now, you have a fork of the original registration_numbers_webapp repository
 
 ## Installations
-- ~Npm init~ this command will install packagejson file 
+- `Npm init` this command will install packagejson file 
 - Than install the dependencies 
 - Type  npm install name of dependency and --save so to save them on you package
-- ~npm install -g nodemon~ This command install nodemon global so that its available in your system path
+- `npm install -g nodemon` This command install nodemon global so that its available in your system path
    nodemon wraps your application, so you can pass all the arguments you would normally pass to your app
    
 ## How to use the App
