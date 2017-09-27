@@ -38,6 +38,10 @@ for CY 123 345 a user is be able to enter any registration number as the last pa
 - `registration2.herokuapp.com` is the name of the App 
 
 ## Adress to use the App local
+- Open the folder on the terminal
+- cd and name of the folder e.g `cd registration_numbers_webapp`
+- After open nodemon e.g `nodemon` or `sudo nodemon`
+- To use the App Local you have to type this URL http://localhost:8000/reg_numbers
 
  
  
